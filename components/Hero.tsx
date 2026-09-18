@@ -1,95 +1,82 @@
+"use client";
+
+import Reveal from "./Reveal";
+import { IconArrowRight, IconUsers, IconGlobe, IconSpark } from "./Icons";
+
+const stats = [
+  { icon: IconUsers, label: "900+ Entrepreneurs" },
+  { icon: IconGlobe, label: "15+ Countries" },
+  { icon: IconSpark, label: "10+ Years Experience" },
+];
+
 export default function Hero() {
   return (
-    <section id="top" className="border-b border-rule">
-      <div className="mx-auto grid max-w-container gap-10 px-5 py-14 sm:px-6 lg:grid-cols-[1.1fr_0.9fr] lg:gap-14 lg:px-8 lg:py-20">
-        <div className="animate-fadeUp">
-          <div className="mb-5 flex items-center gap-2 font-mono text-[0.75rem] text-greenDeep">
-            <span>§</span> Filing No. AL-2026-0917 · Delaware, Wyoming &amp; 48 more
-          </div>
-          <h1 className="font-serif text-[2.1rem] font-semibold leading-[1.12] tracking-tight sm:text-[2.6rem] lg:text-[3.1rem]">
-            A US LLC, filed and running — reviewed by people, handled by AI.
-          </h1>
-          <p className="mt-5 max-w-[46ch] text-[1.05rem] leading-relaxed text-inkSoft">
-            AdEra Labs AI LLC forms and maintains US companies for founders anywhere.
-            Our filing agents draft the paperwork; licensed formation specialists sign
-            off before anything reaches a Secretary of State.
-          </p>
-          <div className="mt-8 flex flex-wrap gap-4">
-            <a
-              href="#pricing"
-              className="rounded-std bg-green px-6 py-3.5 text-[0.95rem] font-medium text-white shadow-sm transition-all hover:-translate-y-0.5 hover:bg-greenDeep hover:shadow-lg"
-            >
-              See pricing
-            </a>
-            <a
-              href="#payments"
-              className="rounded-std border border-ink px-6 py-3.5 text-[0.95rem] font-medium text-ink transition-all hover:-translate-y-0.5 hover:bg-ink hover:text-parchment"
-            >
-              How payments work
-            </a>
-          </div>
-        </div>
+    <section className="relative overflow-hidden pb-16 pt-16 sm:pb-20 sm:pt-20 lg:pb-28 lg:pt-24">
+      {/* decorative floating shapes */}
+      <div className="pointer-events-none absolute inset-0 -z-10">
+        <div className="absolute left-[8%] top-[18%] h-16 w-16 rounded-2xl border border-brand-200 bg-white/60 shadow-soft backdrop-blur-sm animate-floatSlow" />
+        <div
+          className="absolute right-[10%] top-[12%] h-12 w-12 rounded-full bg-brand-100 shadow-soft animate-floatSlow"
+          style={{ animationDelay: "-2.4s" }}
+        />
+        <div
+          className="absolute bottom-[8%] right-[16%] h-20 w-20 rounded-3xl border border-brand-200/70 bg-blush/70 backdrop-blur-sm animate-floatSlow"
+          style={{ animationDelay: "-4.1s" }}
+        />
+      </div>
 
-        <div className="flex flex-col gap-6">
-          <HeroIllustration />
-          <div className="rounded-std border border-rule bg-paper p-6 shadow-sm">
-            <div className="mb-4 flex items-center justify-between border-b border-dashed border-rule pb-3 font-mono text-[0.72rem] text-muted">
-              <span>Formation ledger — live</span>
-              <span className="flex h-10 w-10 rotate-[-8deg] items-center justify-center rounded-full border border-gold text-center font-mono text-[0.58rem] leading-tight text-gold animate-floatSlow">
-                FILED
-                <br />
-                OK
+      <div className="mx-auto max-w-container px-5 text-center sm:px-6 lg:px-8">
+        <Reveal>
+          <span className="inline-flex items-center gap-2 rounded-full border border-brand-200 bg-white/70 px-4 py-1.5 font-display text-[0.72rem] font-semibold uppercase tracking-[0.14em] text-brand-600 shadow-soft backdrop-blur-sm">
+            <span className="h-1.5 w-1.5 rounded-full bg-brand-500" />
+            Established 2018 · Pakistan
+          </span>
+        </Reveal>
+
+        <Reveal delay={1}>
+          <h1 className="mx-auto mt-6 max-w-4xl font-display text-[2.4rem] font-bold leading-[1.08] tracking-tight text-ink sm:text-[3.1rem] lg:text-[3.7rem]">
+            Pakistan&rsquo;s Leading Platform
+            <br className="hidden sm:block" /> for{" "}
+            <span className="text-gradient">Global Business Access</span>
+          </h1>
+        </Reveal>
+
+        <Reveal delay={2}>
+          <p className="mx-auto mt-6 max-w-2xl text-[1.03rem] leading-relaxed text-muted">
+            Empowering Pakistani entrepreneurs with Silicon Valley connections, US company
+            formation, and visa solutions &mdash; so your business can operate on a global stage.
+          </p>
+        </Reveal>
+
+        <Reveal delay={3}>
+          <div className="mt-9 flex flex-col items-center justify-center gap-3.5 sm:flex-row">
+            <a
+              href="/contact"
+              className="group inline-flex items-center gap-2 rounded-full bg-brand-600 px-7 py-3.5 text-[0.97rem] font-semibold text-white shadow-lift transition-all duration-300 hover:-translate-y-0.5 hover:bg-brand-700"
+            >
+              Apply to Silicon Valley Program
+              <IconArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+            </a>
+            <a
+              href="/#programs"
+              className="inline-flex items-center gap-2 rounded-full border border-rule bg-white/70 px-7 py-3.5 text-[0.97rem] font-semibold text-ink backdrop-blur-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-brand-300 hover:text-brand-600"
+            >
+              Explore All Programs
+            </a>
+          </div>
+        </Reveal>
+
+        <Reveal delay={4}>
+          <div className="mx-auto mt-11 flex max-w-2xl flex-wrap items-center justify-center gap-x-8 gap-y-3 text-[0.88rem] font-medium text-inkSoft">
+            {stats.map((s) => (
+              <span key={s.label} className="inline-flex items-center gap-2">
+                <s.icon className="h-4 w-4 text-brand-500" />
+                {s.label}
               </span>
-            </div>
-            {[
-              ["Average time to EIN", "6 days"],
-              ["States supported", "50"],
-              ["Companies formed to date", "3,412"],
-              ["Founders outside the US", "71%"],
-            ].map(([label, value]) => (
-              <div key={label} className="flex justify-between border-b border-rule py-2.5 text-[0.92rem] last:border-none">
-                <span className="text-muted">{label}</span>
-                <span className="font-serif text-[1.05rem] font-semibold">{value}</span>
-              </div>
             ))}
           </div>
-        </div>
+        </Reveal>
       </div>
     </section>
-  );
-}
-
-function HeroIllustration() {
-  return (
-    <svg
-      viewBox="0 0 400 220"
-      className="w-full rounded-std border border-rule bg-paper"
-      role="img"
-      aria-label="Illustration of a filed formation document beside a globe representing founders worldwide"
-    >
-      <rect width="400" height="220" fill="#FFFFFF" />
-      <circle cx="290" cy="110" r="72" fill="none" stroke="#1F6F5C" strokeOpacity="0.25" strokeWidth="1.5" />
-      <circle cx="290" cy="110" r="72" fill="none" stroke="#1F6F5C" strokeOpacity="0.5" strokeWidth="1" strokeDasharray="2 5" />
-      <path d="M 290 38 A 72 72 0 0 1 290 182" fill="none" stroke="#1F6F5C" strokeWidth="1" strokeOpacity="0.4" />
-      <path d="M 220 110 A 70 40 0 0 1 360 110" fill="none" stroke="#1F6F5C" strokeWidth="1" strokeOpacity="0.3" />
-      <path d="M 222 128 A 70 34 0 0 0 358 128" fill="none" stroke="#1F6F5C" strokeWidth="1" strokeOpacity="0.3" />
-      {[
-        [255, 92], [318, 78], [340, 132], [268, 148], [300, 118], [232, 118],
-      ].map(([cx, cy], i) => (
-        <circle key={i} cx={cx} cy={cy} r="2.4" fill="#B98B3E" />
-      ))}
-      <g transform="translate(38, 42)">
-        <rect width="132" height="150" rx="6" fill="#EFECE3" stroke="#12161C" strokeOpacity="0.15" />
-        <rect x="14" y="20" width="80" height="8" rx="2" fill="#12161C" fillOpacity="0.75" />
-        <rect x="14" y="38" width="104" height="4" rx="2" fill="#12161C" fillOpacity="0.2" />
-        <rect x="14" y="48" width="104" height="4" rx="2" fill="#12161C" fillOpacity="0.2" />
-        <rect x="14" y="58" width="70" height="4" rx="2" fill="#12161C" fillOpacity="0.2" />
-        <rect x="14" y="78" width="104" height="4" rx="2" fill="#12161C" fillOpacity="0.14" />
-        <rect x="14" y="88" width="104" height="4" rx="2" fill="#12161C" fillOpacity="0.14" />
-        <rect x="14" y="98" width="60" height="4" rx="2" fill="#12161C" fillOpacity="0.14" />
-        <circle cx="98" cy="126" r="18" fill="none" stroke="#B98B3E" strokeWidth="2" />
-        <path d="M 90 126 l 5 6 l 11 -13" fill="none" stroke="#B98B3E" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-      </g>
-    </svg>
   );
 }

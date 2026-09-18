@@ -7,31 +7,96 @@ html {
 }
 
 body {
-  background-color: #EFECE3;
+  background-color: #FDF7F9;
 }
 
 ::selection {
-  background: #1F6F5C;
+  background: #D42A7C;
   color: #fff;
 }
 
+/* Scroll reveal */
 .reveal {
   opacity: 0;
-  transform: translateY(24px);
-  transition: opacity 0.7s ease, transform 0.7s ease;
+  transform: translateY(28px);
+  transition: opacity 0.8s cubic-bezier(.22,1,.36,1), transform 0.8s cubic-bezier(.22,1,.36,1);
+  will-change: opacity, transform;
 }
 .reveal.in-view {
   opacity: 1;
   transform: translateY(0);
 }
+.reveal-delay-1.in-view { transition-delay: 0.08s; }
+.reveal-delay-2.in-view { transition-delay: 0.16s; }
+.reveal-delay-3.in-view { transition-delay: 0.24s; }
+.reveal-delay-4.in-view { transition-delay: 0.32s; }
+.reveal-delay-5.in-view { transition-delay: 0.4s; }
+
+/* Gradient text */
+.text-gradient {
+  background: linear-gradient(100deg, #D42A7C 0%, #B61568 45%, #E7549A 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Shimmer skeleton / placeholder art */
+.shimmer-bg {
+  background: linear-gradient(110deg, #F8C1DB 8%, #FCE2EE 18%, #F8C1DB 33%);
+  background-size: 200% 100%;
+  animation: shimmer 3s linear infinite;
+}
+
+/* Card hover lift */
+.card-lift {
+  transition: transform 0.45s cubic-bezier(.22,1,.36,1), box-shadow 0.45s cubic-bezier(.22,1,.36,1), border-color 0.35s ease;
+}
+.card-lift:hover {
+  transform: translateY(-6px);
+}
+
+/* Play button pulse ring */
+.pulse-ring::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+  border: 2px solid rgba(255,255,255,0.9);
+  animation: pulseRing 2.2s cubic-bezier(0,0,0.2,1) infinite;
+}
+
+/* Marquee */
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee 34s linear infinite;
+}
+.marquee-track:hover {
+  animation-play-state: paused;
+}
+
+.input-field {
+  width: 100%;
+  border-radius: 10px;
+  border: 1px solid theme('colors.rule');
+  background-color: theme('colors.cream');
+  padding: 0.65rem 0.85rem;
+  font-size: 0.92rem;
+  color: theme('colors.ink');
+  outline: none;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+.input-field:focus-visible {
+  border-color: theme('colors.brand.400');
+  box-shadow: 0 0 0 3px theme('colors.brand.100');
+}
 
 @media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
+  html { scroll-behavior: auto; }
   * {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }

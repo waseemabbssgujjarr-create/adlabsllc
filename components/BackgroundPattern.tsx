@@ -1,28 +1,16 @@
 export default function BackgroundPattern() {
   return (
-    <div
-      aria-hidden="true"
-      className="pointer-events-none fixed inset-0 -z-10 opacity-[0.5]"
-    >
-      <svg width="100%" height="100%" className="h-full w-full">
-        <defs>
-          <pattern id="ledger-grid" width="88" height="88" patternUnits="userSpaceOnUse">
-            <path
-              d="M 88 0 L 0 0 0 88"
-              fill="none"
-              stroke="#12161C"
-              strokeOpacity="0.05"
-              strokeWidth="1"
-            />
-            <circle cx="0" cy="0" r="1.1" fill="#12161C" fillOpacity="0.08" />
-          </pattern>
-          <linearGradient id="fade-bottom" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stopColor="#EFECE3" stopOpacity="0" />
-            <stop offset="100%" stopColor="#EFECE3" stopOpacity="0.9" />
-          </linearGradient>
-        </defs>
-        <rect width="100%" height="100%" fill="url(#ledger-grid)" />
-      </svg>
+    <div className="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
+      <div className="absolute inset-0 bg-grain" />
+      <div className="absolute -left-24 -top-24 h-[420px] w-[420px] rounded-full bg-brand-200/40 blur-[110px] animate-blobMove" />
+      <div
+        className="absolute right-[-10%] top-[8%] h-[380px] w-[380px] rounded-full bg-brand-100/60 blur-[100px] animate-blobMove"
+        style={{ animationDelay: "-6s" }}
+      />
+      <div
+        className="absolute bottom-[-10%] left-[20%] h-[460px] w-[460px] rounded-full bg-blush blur-[120px] animate-blobMove"
+        style={{ animationDelay: "-11s" }}
+      />
     </div>
   );
 }

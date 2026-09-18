@@ -1,43 +1,65 @@
-import type { Metadata } from "next";
 import PageShell from "@/components/PageShell";
-
-export const metadata: Metadata = {
-  title: "Privacy Policy — AdEra Labs AI LLC",
-  description: "How AdEra Labs AI LLC collects, uses, and protects your information.",
-};
+import Reveal from "@/components/Reveal";
 
 const sections = [
   {
-    title: "1. What we collect",
-    body: "When you request a formation, we collect the information needed to prepare and file your paperwork: your legal name, contact details, country of residence, chosen business name and state, ownership structure, and, where required for EIN registration, identification details for each member. When you use our checkout, we collect the billing details needed to process payment; we do not store full card numbers ourselves.",
+    title: "1. Introduction",
+    body: `AdEra Labs ("AdEra Labs," "we," "us," or "our") provides Silicon Valley exchange programs, US company formation services, visa consultation, and related events and services for entrepreneurs based primarily in Pakistan. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website, apply to a program, or otherwise interact with us.`,
   },
   {
-    title: "2. How we use it",
-    body: "Your information is used to prepare Articles of Organization, operating agreements, EIN applications, and registered agent filings; to communicate with you about the status of your order; to meet our own recordkeeping and compliance obligations as a formation agent; and to open a Wise Business account on your behalf where that service is included in your plan.",
+    title: "2. Information We Collect",
+    body: `We may collect the following categories of information:
+• Contact details — name, email address, phone number, and mailing address.
+• Application & program information — passport details, employment/business information, and documents you submit as part of a company formation, visa consultation, or program application.
+• Communications — messages you send us via our contact form, email, or WhatsApp.
+• Technical data — IP address, browser type, device information, and usage data collected through cookies or similar technologies when you browse our website.
+• Payment information — where applicable, processed by our third-party payment providers; we do not store full card numbers on our own servers.`,
   },
   {
-    title: "3. Who we share it with",
-    body: "We share the minimum necessary information with the Secretary of State of your chosen state, the IRS for EIN registration, our registered agent partners, and Wise, when a Wise Business account is part of your order. We do not sell your information, and we do not share it with advertisers.",
+    title: "3. How We Use Your Information",
+    body: `We use the information we collect to:
+• Evaluate and process applications for our programs and services.
+• Communicate with you about your application, event registration, or inquiry.
+• Facilitate company formation, banking introductions, and visa consultation services.
+• Improve our website, programs, and services.
+• Comply with legal, regulatory, and government-relations obligations.
+• Send you updates about programs and events, where you have opted in.`,
   },
   {
-    title: "4. How long we keep it",
-    body: "We retain formation records for as long as we serve as your registered agent or compliance contact, and for a reasonable period afterward to meet recordkeeping obligations. You can request deletion of information we're not required to retain by contacting us.",
+    title: "4. Sharing of Information",
+    body: `We do not sell your personal information. We may share information with:
+• Trusted service providers who help us operate (e.g., email delivery, payment processing, cloud hosting), under confidentiality obligations.
+• Government agencies, consulates, or financial institutions where necessary to complete a company formation or visa application you have requested.
+• Professional advisors (legal, accounting) as needed to deliver our services.
+• Authorities where required by law or to protect our legal rights.`,
   },
   {
-    title: "5. Your choices",
-    body: "You can ask us what information we hold about you, correct inaccuracies, or request deletion where we're not legally required to keep it, by emailing hello@aderalabsllc.com. If you're in a jurisdiction with a statutory right of access or portability, we'll honor it on request.",
+    title: "5. Data Retention",
+    body: `We retain personal information for as long as necessary to provide our services, comply with legal obligations, resolve disputes, and enforce our agreements. Application documents related to company formation or visa consultation may be retained for the periods required by applicable regulatory bodies.`,
   },
   {
-    title: "6. Cookies and analytics",
-    body: "This site uses minimal, functional cookies and standard web analytics to understand which pages are useful. We don't use third-party ad-tracking cookies.",
+    title: "6. Your Rights",
+    body: `Depending on your location, you may have the right to access, correct, delete, or restrict the use of your personal information, and to withdraw consent to marketing communications at any time. To exercise any of these rights, contact us at hello@aderalabs.com.`,
   },
   {
-    title: "7. Security",
-    body: "We use standard technical and organizational safeguards to protect the information you share with us. No method of transmission or storage is completely secure, and we can't guarantee absolute security.",
+    title: "7. Data Security",
+    body: `We use reasonable administrative, technical, and physical safeguards designed to protect your information. However, no method of transmission or storage is completely secure, and we cannot guarantee absolute security.`,
   },
   {
-    title: "8. Changes to this policy",
-    body: "We'll update this page when our practices change and note the effective date below. Continued use of the site after an update means you accept the revised policy.",
+    title: "8. Cookies",
+    body: `Our website may use cookies and similar technologies to remember your preferences and understand how visitors use our site. You can control cookies through your browser settings; disabling cookies may affect some site functionality.`,
+  },
+  {
+    title: "9. Children's Privacy",
+    body: `Our services are intended for individuals who are at least 18 years old or the age of majority in their jurisdiction. We do not knowingly collect personal information from children.`,
+  },
+  {
+    title: "10. Changes to This Policy",
+    body: `We may update this Privacy Policy from time to time. We will post the revised policy on this page with an updated effective date. Continued use of our website or services after changes constitutes acceptance of the revised policy.`,
+  },
+  {
+    title: "11. Contact Us",
+    body: `If you have questions about this Privacy Policy or how we handle your information, contact us at hello@aderalabs.com or write to our regional office in Johar Town, Lahore, Pakistan.`,
   },
 ];
 
@@ -46,22 +68,17 @@ export default function PrivacyPage() {
     <PageShell
       eyebrow="Legal"
       title="Privacy Policy"
-      intro="Effective date: January 1, 2026. This explains what we collect when you use AdEra Labs AI LLC to form and maintain a US company, and how we use it."
+      intro="Effective date: September 18, 2026. This policy describes how AdEra Labs collects, uses, and protects your information."
     >
-      <div className="flex flex-col gap-8">
-        {sections.map((s) => (
-          <div key={s.title}>
-            <h2 className="mb-2 font-serif text-[1.1rem] font-semibold text-ink">{s.title}</h2>
-            <p className="text-[0.95rem] leading-relaxed text-muted">{s.body}</p>
-          </div>
+      <div className="space-y-9">
+        {sections.map((s, i) => (
+          <Reveal key={s.title} delay={Math.min((i % 5) + 1, 5) as 1 | 2 | 3 | 4 | 5}>
+            <div>
+              <h2 className="font-display text-[1.05rem] font-semibold text-ink">{s.title}</h2>
+              <p className="mt-2.5 whitespace-pre-line text-[0.92rem] leading-relaxed text-inkSoft">{s.body}</p>
+            </div>
+          </Reveal>
         ))}
-        <p className="border-t border-rule pt-6 text-[0.86rem] text-muted">
-          Questions about this policy? Contact us at{" "}
-          <a href="mailto:hello@aderalabsllc.com" className="text-greenDeep underline">
-            hello@aderalabsllc.com
-          </a>
-          .
-        </p>
       </div>
     </PageShell>
   );

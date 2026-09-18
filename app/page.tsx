@@ -1,11 +1,13 @@
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
+import Programs from "@/components/Programs";
+import Events from "@/components/Events";
 import Services from "@/components/Services";
-import Process from "@/components/Process";
-import Pricing from "@/components/Pricing";
-import Payments from "@/components/Payments";
+import Highlights from "@/components/Highlights";
+import Impact from "@/components/Impact";
 import Testimonials from "@/components/Testimonials";
-import FAQ from "@/components/FAQ";
+import Media from "@/components/Media";
+import Partners from "@/components/Partners";
 import FinalCTA from "@/components/FinalCTA";
 import Footer from "@/components/Footer";
 import BackgroundPattern from "@/components/BackgroundPattern";
@@ -17,12 +19,14 @@ export default function Home() {
       <Navbar />
       <main>
         <Hero />
+        <Programs />
+        <Events />
         <Services />
-        <Process />
-        <Pricing />
-        <Payments />
+        <Highlights />
+        <Impact />
         <Testimonials />
-        <FAQ />
+        <Media />
+        <Partners />
         <FinalCTA />
       </main>
       <Footer />

@@ -1,77 +1,85 @@
-# AdEra Labs AI LLC — Next.js site
+# AdEra Labs — Website
 
-A mobile-first, TypeScript + Tailwind CSS Next.js (App Router) build of the AdEra Labs AI LLC
-formation website, with a working mobile nav, an original SVG hero illustration and section
-icons (no stock photos, so there's nothing to license), a professional footer, About/Contact/
-Privacy/Terms pages, and a demo payment flow (Wise transfer + card tabs) with selectable
-address and WhatsApp-number add-ons.
+A Next.js 14 (App Router) + Tailwind CSS site for AdEra Labs, rebuilt with a more
+polished visual design, scroll animations, and four new pages: About, Contact,
+Privacy Policy and Terms & Conditions.
 
-## Run it locally
+## Getting started
 
 ```bash
 npm install
 npm run dev
 ```
 
-Then open http://localhost:3000.
+Visit http://localhost:3000
 
-## Deploy
+## Wiring up the contact form to your email
 
-This project is configured for **static export** (`output: "export"` in `next.config.js`), so
-`npm run build` produces a plain `out/` folder deployable to any static host — including cPanel
-shared hosting with no Node.js runtime. See **[DEPLOYMENT.md](./DEPLOYMENT.md)** for the full
-git-push and cPanel walkthrough. It also deploys as-is to Vercel or Netlify.
+The contact form on `/contact` posts to `app/api/contact/route.ts`, which sends
+the message to your inbox using [Resend](https://resend.com) (a simple
+transactional email API with a generous free tier).
 
-```bash
-npm run build   # → out/
-```
+1. Create a free account at https://resend.com
+2. Create an API key (Dashboard → API Keys)
+3. Copy `.env.example` to `.env.local` and paste your key:
 
-## What's a demo vs. production-ready
+   ```
+   RESEND_API_KEY=re_xxxxxxxxxxxx
+   CONTACT_TO_EMAIL=hello@aderalabs.com
+   CONTACT_FROM_EMAIL=AdEra Labs Website <onboarding@resend.dev>
+   ```
 
-- **Payments**: `components/PaymentModal.tsx` shows Wise transfer details and a card form, but
-  no real transfer or charge happens — it's a UI shell. For production, wire the Wise tab to the
-  [Wise Business API](https://docs.wise.com/api-docs) (to generate a real account and match
-  incoming transfers) and the card tab to a PCI-compliant gateway such as Stripe, from a server
-  route (`app/api/...`) — never process card data on the client. Note: adding a server route
-  means removing `output: "export"` and hosting on a Node runtime (see DEPLOYMENT.md Option B).
-- **Add-ons**: the dedicated address (+$149/yr) and dedicated WhatsApp number (+$59) choices in
-  `PaymentModal.tsx` correctly compute the running total and flow into the Wise transfer amount
-  and order summary, but nothing is provisioned automatically — a live build should trigger
-  actual registered-agent and WhatsApp Cloud API provisioning after payment confirms.
-- **Contact form**: `app/contact/page.tsx` is a demo — it shows a success state on submit but
-  doesn't send anything. Wire it to your support inbox or a form service before launch.
-- **Copy and numbers**: pricing, stats, testimonials, and the Privacy/Terms boilerplate are
-  reasonable starting points, not reviewed legal text — have a lawyer check Privacy/Terms before
-  relying on them.
-- **Fonts**: Fraunces, IBM Plex Sans, and IBM Plex Mono load via `next/font/google` **at build
-  time only** — the built site needs no external font requests at runtime, but the machine
-  running `npm run build` does need internet access to fonts.googleapis.com.
+4. That's it — `onboarding@resend.dev` is Resend's shared sending address, so
+   mail will start flowing immediately, even before you have a domain.
+5. **Once your domain is live**, verify it in Resend (Dashboard → Domains) and
+   change `CONTACT_FROM_EMAIL` to something like
+   `AdEra Labs Website <notifications@aderalabs.com>` for better deliverability.
 
-## Structure
+If `RESEND_API_KEY` isn't set, the form will show a friendly error and point
+visitors to email `hello@aderalabs.com` directly instead of failing silently.
+
+## Domain name — currently pending
+
+You mentioned the domain isn't decided yet, so nothing in this codebase hardcodes
+one. A few things to update once you pick a domain:
+
+- `app/layout.tsx` — uncomment and set `metadataBase: new URL("https://yourdomain.com")`
+  for correct social-share previews.
+- Update the `CONTACT_FROM_EMAIL` sender once the domain's DNS is verified in Resend.
+- Point your domain registrar/DNS at wherever you deploy (see below).
+
+## Deploying
+
+The fastest path is [Vercel](https://vercel.com) (made by the Next.js team):
+
+1. Push this project to a GitHub repo.
+2. Import it in Vercel.
+3. Add the three environment variables from `.env.local` in the Vercel project settings.
+4. Deploy. Once you have a domain, attach it in Vercel → Domains.
+
+## Project structure
 
 ```
 app/
-  layout.tsx      — fonts, metadata, global shell
-  page.tsx        — assembles all homepage sections
-  about/page.tsx        — company/mission page
-  contact/page.tsx      — contact details + demo form
-  privacy/page.tsx      — privacy policy
-  terms/page.tsx        — terms of service
-  globals.css     — Tailwind entry + reveal-on-scroll utility
-components/
-  PageShell.tsx     — shared header/footer wrapper for About/Contact/Privacy/Terms
-  Navbar.tsx        — sticky nav with a working mobile menu (hamburger → panel)
-  Hero.tsx          — headline + original SVG illustration + live-stats card
-  Services.tsx      — 6 services, custom line icons
-  Process.tsx       — 5-step numbered sequence
-  Pricing.tsx       — 3 plans, opens PaymentModal
-  PaymentModal.tsx  — Wise transfer / card demo checkout, with address + WhatsApp add-ons
-  Payments.tsx      — payment methods + supported currencies
-  Testimonials.tsx  — 3 founder quotes
-  FAQ.tsx           — accordion
-  FinalCTA.tsx      — closing banner
-  Footer.tsx        — 5-column professional footer, linked to About/Contact/Privacy/Terms
-  BackgroundPattern.tsx — subtle fixed blueprint-grid background
-  Reveal.tsx        — scroll-reveal wrapper (IntersectionObserver)
+  page.tsx            → homepage (Hero, Programs, Events, Services, Impact, ...)
+  about/page.tsx       → About Us
+  contact/page.tsx      → Contact page with working form
+  privacy/page.tsx      → Privacy Policy
+  terms/page.tsx        → Terms & Conditions
+  api/contact/route.ts   → Server route that emails form submissions
+components/            → All UI building blocks (Navbar, Footer, Hero, cards, etc.)
 ```
 
+## Notes on imagery
+
+All program/event/service "photos" are currently elegant abstract gradient
+panels (`components/Art.tsx`) rather than real photography, so the site ships
+fully self-contained with no placeholder stock photos or copyrighted images.
+Swap any `<Art .../>` usage for a real `<img>`/`next/image` once you have
+photography from your programs and events — the surrounding card styling will
+keep working as-is.
+
+Similarly, the testimonial names/quotes and the "worked with" partner
+wordmarks are placeholders reconstructed from your existing site — please
+replace them with verified, real client testimonials and confirmed partner
+names before publishing.
